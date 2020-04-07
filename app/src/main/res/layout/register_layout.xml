@@ -14,8 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
-            android:padding="20dp"
             android:fontFamily="@font/product_sans_bold"
+            android:padding="20dp"
             android:text="@string/registration"
             android:textAlignment="center"
             android:textColor="@color/textWhite"
@@ -84,9 +84,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/address"
-                        android:inputType="textMultiLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
                         android:textColor="@color/textBlack"
                         android:textSize="18sp" />
 
@@ -116,45 +116,51 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <CheckBox
-                android:id="@+id/maleCheckbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="18sp"
-                android:text="@string/male" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/femaleCheckbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="18sp"
-                android:text="@string/female" />
+                <RadioButton
+                    android:id="@+id/maleRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/male"
+                    android:textSize="18sp" />
 
-            <CheckBox
-                android:id="@+id/notToSayCheckbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:padding="10dp"
-                android:textSize="18sp"
-                android:text="@string/prefer_not_to_say" />
+                <RadioButton
+                    android:id="@+id/femaleRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/female"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/notToSayRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:padding="10dp"
+                    android:text="@string/prefer_not_to_say"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
 
             <TextView
-                android:text="@string/reg_once"
-                android:textStyle="italic"
-                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/reg_once"
+                android:textStyle="italic" />
 
             <Button
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/button"
                 android:padding="10dp"
-                android:layout_marginBottom="10dp"
                 android:text="@string/register"
                 android:textColor="@color/textWhite"
                 android:textSize="20sp"

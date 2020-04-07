@@ -11,4 +11,9 @@
     <string name="select_gender">Select gender</string>
     <string name="locationpin">LocationPin</string>
     <string name="reg_once">Registration can be done only once, so please enter the correct credentials</string>
+    <string name="welcome_guest">WELCOME GUEST</string>
+    <string name="tabsimage">TabsImage</string>
+    <string name="medical_shop">MEDICAL SHOP</string>
+    <string name="grocery_store">GROCERY STORE</string>
+    <string name="choose_an_option">Choose an option</string>
 </resources>
