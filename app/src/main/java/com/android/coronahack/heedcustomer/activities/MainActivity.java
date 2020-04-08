@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.coronahack.heedcustomer.R;
@@ -54,30 +55,63 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     ResultReceiver resultReceiver;
     ProgressBar progressBar;
+    ImageView medicalShop, groceryStore;
+    TextView welcomeText;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        welcomeText = findViewById(R.id.welcome_text);
+        medicalShop = findViewById(R.id.medicineButton);
+        groceryStore = findViewById(R.id.groceriesButton);
+
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstStart = sharedPreferences.getBoolean("firstStart", true);
-        GlobalData.name = sharedPreferences.getString("name", "NULL");
+        GlobalData.name = sharedPreferences.getString("name", "GUEST");
         GlobalData.age = sharedPreferences.getString("age", "NULL");
         GlobalData.address = sharedPreferences.getString("address", "NULL");
         GlobalData.gender = sharedPreferences.getString("gender", "NULL");
         GlobalData.isVolunteer = sharedPreferences.getString("isVolunteer", "0");
 
+        welcomeText.setText("Welcome, "+GlobalData.name.toUpperCase()+" !");
+
         if (firstStart) {
             startRegistration();
         }
 
+        medicalShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MedicalShopActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        groceryStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GroceryStoreActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void startRegistration() {
         ViewGroup viewGroup = findViewById(android.R.id.content);
         final View registerView = LayoutInflater.from(this).inflate(R.layout.register_layout, viewGroup, false);
+
+        if (!isConnected()) {
+            AlertDialog alertDialog;
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage("Please switch on your internet connection and restart your app for hassle-free usage!")
+                    .setCancelable(true);
+            alertDialog = builder.create();
+            alertDialog.setTitle("Connectivity Issue");
+            alertDialog.show();
+        }
 
         SharedPreferences preferences = getSharedPreferences("prefs", MODE_PRIVATE);
         final SharedPreferences.Editor editor = preferences.edit();

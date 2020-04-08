@@ -58,7 +58,6 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="@string/welcome_guest"
-            android:textAllCaps="true"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold" />
