@@ -18,4 +18,15 @@
     <string name="choose_an_option">Choose an option</string>
     <string name="register_as_a_volunteer">Register as a volunteer</string>
     <string name="volunteer_text">Volunteers do not necessarily have the time; they just have the heart. Volunteers are the only human beings on the face of the earth who reflect this nation\'s compassion, unselfish caring, patience, and just plain loving one another. Click here to be a part in this fight against Corona!</string>
+    <string name="select_medical_shop">Select your nearest Medical shop</string>
+    <string name="upload_your_prescription">Upload your prescription (For necessary tablets)</string>
+    <string name="camera_button">Camera button</string>
+    <string name="your_nearest_medical_shop">Your nearest medical shop</string>
+    <string name="your_prescription">Your prescription</string>
+    <string name="add_your_tablets_in_the_list">Add your tablets in the list</string>
+    <string name="tablet_name">Tablet name</string>
+    <string name="quantity">Quantity</string>
+    <string name="submit">SUBMIT</string>
+    <string name="sample_tablet">Sample tablet</string>
+    <string name="_40">40</string>
 </resources>

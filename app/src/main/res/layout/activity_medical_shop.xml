@@ -1,9 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.MedicalShopActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/buyMedicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationContentDescription="@string/abc_action_bar_up_description"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <ScrollView
+        android:id="@+id/scrollMedicineShop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buyMedicine"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="@string/select_medical_shop"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="2"
+                tools:ignore="UselessParent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/box4"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:hint="@string/your_nearest_medical_shop"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    app:boxStrokeColor="@color/colorAccent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nearestMed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:inputType="textMultiLine"
+                        android:textColor="@color/textBlack"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/medLocationButton"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:contentDescription="@string/locationpin"
+                    android:padding="8dp"
+                    android:src="@drawable/location_pin"
+                    android:tint="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/upload_your_prescription"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                tools:ignore="UselessParent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/box5"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:hint="@string/your_prescription"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    app:boxStrokeColor="@color/colorAccent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/uploadPrescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:inputType="textMultiLine"
+                        android:textColor="@color/textBlack"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/uploadPrescriptionButton"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:contentDescription="@string/camera_button"
+                    android:padding="8dp"
+                    android:src="@drawable/camera"
+                    android:tint="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/add_your_tablets_in_the_list"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                tools:ignore="UselessParent">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/box6"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:hint="@string/tablet_name"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    app:boxStrokeColor="@color/colorAccent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tabName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:textColor="@color/textBlack"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/box7"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:hint="@string/quantity"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    app:boxStrokeColor="@color/colorAccent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tabQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/textBlack"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/tabPlus"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button"
+                android:contentDescription="@string/camera_button"
+                android:padding="8dp"
+                android:src="@drawable/plus"
+                android:tint="@color/colorAccent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tabsRecycler"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:textSize="18sp"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/product_sans_bold"
+                android:background="@drawable/button"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

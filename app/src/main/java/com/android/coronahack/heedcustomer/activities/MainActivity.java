@@ -58,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView medicalShop, groceryStore;
     TextView welcomeText;
 
+    AlertDialog.Builder builder;
+    AlertDialog alertDialog = null;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,16 @@ public class MainActivity extends AppCompatActivity {
             startRegistration();
         }
 
+        if (!isConnected()) {
+            AlertDialog alertDialogError;
+            AlertDialog.Builder builderError = new AlertDialog.Builder(MainActivity.this);
+            builderError.setMessage("Please switch on your internet connection and restart your app for hassle-free usage!")
+                    .setCancelable(false);
+            alertDialogError = builderError.create();
+            alertDialogError.setTitle("Connectivity Issue");
+            alertDialogError.show();
+        }
+
         medicalShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,12 +117,19 @@ public class MainActivity extends AppCompatActivity {
         final View registerView = LayoutInflater.from(this).inflate(R.layout.register_layout, viewGroup, false);
 
         if (!isConnected()) {
-            AlertDialog alertDialog;
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setMessage("Please switch on your internet connection and restart your app for hassle-free usage!")
-                    .setCancelable(true);
-            alertDialog = builder.create();
-            alertDialog.setTitle("Connectivity Issue");
+            AlertDialog alertDialogError;
+            AlertDialog.Builder builderError = new AlertDialog.Builder(MainActivity.this);
+            builderError.setMessage("Please switch on your internet connection and restart your app for hassle-free usage!")
+                    .setCancelable(false);
+            alertDialogError = builderError.create();
+            alertDialogError.setTitle("Connectivity Issue");
+            alertDialogError.show();
+        } else {
+            builder = new AlertDialog.Builder(this);
+            builder.setView(registerView);
+            alertDialog = builder
+                    .setCancelable(false)
+                    .create();
             alertDialog.show();
         }
 
@@ -124,13 +144,6 @@ public class MainActivity extends AppCompatActivity {
         ImageView getLocation = registerView.findViewById(R.id.locationButton);
         final CheckBox volunteerCheckbox = registerView.findViewById(R.id.volunteerCheckbox);
         progressBar = registerView.findViewById(R.id.progressBar);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(registerView);
-        final AlertDialog alertDialog = builder
-                .setCancelable(false)
-                .create();
-        alertDialog.show();
 
         resultReceiver = new AddressResultReceiver(new Handler());
 
