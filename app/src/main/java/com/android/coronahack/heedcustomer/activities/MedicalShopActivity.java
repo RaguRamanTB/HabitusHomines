@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MedicalShopActivity extends AppCompatActivity {
 
-    ImageView locateMed, addTab, uploadPrescription;
+    ImageView locateMed, addTab, removeTab, uploadPrescription;
     EditText nearestMed, uploadedPrescription, tabName, tabQuantity;
     Button submit;
     RecyclerView tabsRecycler;
@@ -45,6 +45,7 @@ public class MedicalShopActivity extends AppCompatActivity {
 
         locateMed = findViewById(R.id.medLocationButton);
         addTab = findViewById(R.id.tabPlus);
+        removeTab = findViewById(R.id.tabMinus);
         uploadPrescription = findViewById(R.id.uploadPrescriptionButton);
         nearestMed = findViewById(R.id.nearestMed);
         uploadedPrescription = findViewById(R.id.uploadPrescription);
@@ -62,6 +63,21 @@ public class MedicalShopActivity extends AppCompatActivity {
                 addTablets();
             }
         });
+
+        removeTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeTablets();
+            }
+        });
+    }
+
+    private void removeTablets() {
+        if (enterMedsList.size() > 0) {
+            enterMedsList.remove(enterMedsList.size() - 1);
+            mAdapter = new EnterMedAdapter(this, enterMedsList);
+            tabsRecycler.setAdapter(mAdapter);
+        }
     }
 
     private void addTablets() {
@@ -71,11 +87,13 @@ public class MedicalShopActivity extends AppCompatActivity {
 
         if (getTabName.equals("") || getTabName.length() == 0
                 || getTabQuantity.equals("") || getTabQuantity.length() == 0) {
-            Toast.makeText(MedicalShopActivity.this, "Enter both tablet name and quantity",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MedicalShopActivity.this, "Enter both tablet name and quantity", Toast.LENGTH_SHORT).show();
         } else {
             enterMedsList.add(new EnterMeds(getTabName, getTabQuantity));
             mAdapter = new EnterMedAdapter(this, enterMedsList);
             tabsRecycler.setAdapter(mAdapter);
+            tabName.setText("");
+            tabQuantity.setText("");
         }
     }
 }

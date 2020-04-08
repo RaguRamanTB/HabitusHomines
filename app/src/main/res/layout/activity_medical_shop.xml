@@ -215,35 +215,58 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/tabPlus"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/button"
-                android:contentDescription="@string/camera_button"
-                android:padding="8dp"
-                android:src="@drawable/plus"
-                android:tint="@color/colorAccent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/tabPlus"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:contentDescription="@string/camera_button"
+                    android:padding="8dp"
+                    android:src="@drawable/plus"
+                    android:tint="@color/colorAccent" />
+
+                <ImageView
+                    android:id="@+id/tabMinus"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:contentDescription="@string/camera_button"
+                    android:padding="8dp"
+                    android:src="@drawable/minus"
+                    android:tint="@color/colorAccent" />
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tabsRecycler"
-                android:padding="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
 
             <Button
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/submit"
-                android:textSize="18sp"
                 android:layout_margin="10dp"
+                android:background="@drawable/button"
                 android:fontFamily="@font/product_sans_bold"
-                android:background="@drawable/button"/>
+                android:text="@string/submit"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
