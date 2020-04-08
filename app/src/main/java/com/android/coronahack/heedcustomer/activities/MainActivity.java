@@ -168,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getCurrentLocation() {
+
+        progressBar.setVisibility(View.VISIBLE);
+
         LocationRequest locationRequest = new LocationRequest();
         locationRequest.setInterval(10000);
         locationRequest.setFastestInterval(3000);
