@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,14 +16,16 @@ import android.widget.Toast;
 import com.android.coronahack.heedcustomer.R;
 import com.android.coronahack.heedcustomer.helpers.EnterMedAdapter;
 import com.android.coronahack.heedcustomer.helpers.EnterMeds;
+import com.android.coronahack.heedcustomer.helpers.GlobalData;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GroceryStoreActivity extends AppCompatActivity {
 
     ImageView locateG, addG, removeG;
-    EditText nearestG, gName, gQuantity;
+    public static EditText nearestG, gName, gQuantity;
     Button submitG;
     RecyclerView gRecycler;
     RecyclerView.Adapter gAdapter;
@@ -66,6 +69,15 @@ public class GroceryStoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 removeGroceries();
+            }
+        });
+
+        locateG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GroceryStoreActivity.this, MapsActivity.class);
+                intent.putExtra("type", "grocery");
+                startActivity(intent);
             }
         });
     }

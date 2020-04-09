@@ -20,4 +20,7 @@ public class GlobalData {
     public static String medicalShopName = "";
     public static String medicalShopAddress = "";
 
+    public static String groceryShopName = "";
+    public static String groceryShopAddress = "";
+
 }

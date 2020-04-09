@@ -36,6 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LocationRequest request;
     LatLng latLng;
     Button search;
+    String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Bundle extras = getIntent().getExtras();
+        assert extras != null;
+        type = extras.getString("type");
+
         search = findViewById(R.id.search);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,11 +109,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void findMedicalShops() {
         mMap.setOnMarkerClickListener(this);
 
-        StringBuilder stringBuilder =  new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        stringBuilder.append("location="+latLng.latitude+","+latLng.longitude);
-        stringBuilder.append("&radius="+3000); //3kms radius = 3000m
-        stringBuilder.append("&keyword="+"medicalshop");
-        stringBuilder.append("&key="+getResources().getString(R.string.google_places_key));
+        StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        stringBuilder.append("location=" + latLng.latitude + "," + latLng.longitude);
+        stringBuilder.append("&radius=" + 3000); //3kms radius = 3000m
+        if (type.equals("medicine")) {
+            stringBuilder.append("&keyword=" + "medicalshop");
+        } else if (type.equals("grocery")) {
+            stringBuilder.append("&keyword=" + "grocery");
+        }
+        stringBuilder.append("&key=" + getResources().getString(R.string.google_places_key));
         String url = stringBuilder.toString();
 
         Object[] dataTransfer = new Object[2];
@@ -121,9 +131,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @SuppressLint("SetTextI18n")
     @Override
     public boolean onMarkerClick(Marker marker) {
-        GlobalData.medicalShopName = marker.getTitle();
-        GlobalData.medicalShopAddress = marker.getSnippet();
-        MedicalShopActivity.nearestMed.setText(GlobalData.medicalShopName + "\n" + GlobalData.medicalShopAddress);
+        if (type.equals("medicine")) {
+            GlobalData.medicalShopName = marker.getTitle();
+            GlobalData.medicalShopAddress = marker.getSnippet();
+            MedicalShopActivity.nearestMed.setText(GlobalData.medicalShopName + "\n" + GlobalData.medicalShopAddress);
+        } else if (type.equals("grocery")) {
+            GlobalData.groceryShopName = marker.getTitle();
+            GlobalData.groceryShopAddress = marker.getSnippet();
+            GroceryStoreActivity.nearestG.setText(GlobalData.groceryShopName + "\n" + GlobalData.groceryShopAddress);
+        }
         AlertDialog alertDialogError;
         AlertDialog.Builder builderError = new AlertDialog.Builder(MapsActivity.this);
         builderError.setMessage("Please press back once you have selected your nearest shop!")

@@ -106,7 +106,9 @@ public class MedicalShopActivity extends AppCompatActivity {
         locateMed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MedicalShopActivity.this, MapsActivity.class));
+                Intent intent = new Intent(MedicalShopActivity.this, MapsActivity.class);
+                intent.putExtra("type", "medicine");
+                startActivity(intent);
             }
         });
     }
