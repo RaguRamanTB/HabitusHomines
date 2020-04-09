@@ -114,7 +114,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         dataTransfer[0] = mMap;
         dataTransfer[1] = url;
 
-        GetNearbyShop getNearbyMedical = new GetNearbyShop();
+        GetNearbyShop getNearbyMedical = new GetNearbyShop(MapsActivity.this);
         getNearbyMedical.execute(dataTransfer);
     }
 

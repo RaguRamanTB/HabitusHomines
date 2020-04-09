@@ -1,5 +1,8 @@
 package com.android.coronahack.heedcustomer.helpers;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.android.coronahack.heedcustomer.activities.MapsActivity;
@@ -26,10 +29,20 @@ public class GetNearbyShop extends AsyncTask<Object, String, String> {
     BufferedReader bufferedReader;
     StringBuilder stringBuilder;
     String data;
+    private ProgressDialog progressDialog;
+    @SuppressLint("StaticFieldLeak")
+    Context context;
+
+    public GetNearbyShop(Context ctx) {
+        context = ctx;
+    }
 
     @Override
     protected void onPreExecute() {
-        super.onPreExecute();
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Loading ... ");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
     }
 
     @Override
@@ -58,6 +71,7 @@ public class GetNearbyShop extends AsyncTask<Object, String, String> {
 
     @Override
     protected void onPostExecute(String s) {
+        progressDialog.dismiss();
         try {
             JSONObject parent = new JSONObject(s);
             JSONArray results = parent.getJSONArray("results");
