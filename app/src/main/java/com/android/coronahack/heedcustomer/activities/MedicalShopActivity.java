@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import com.android.coronahack.heedcustomer.R;
 import com.android.coronahack.heedcustomer.helpers.EnterMedAdapter;
 import com.android.coronahack.heedcustomer.helpers.EnterMeds;
+import com.android.coronahack.heedcustomer.helpers.GlobalData;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -42,7 +44,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class MedicalShopActivity extends AppCompatActivity {
 
     ImageView locateMed, addTab, removeTab, uploadPrescription, uploadedPrescription;
-    EditText nearestMed, tabName, tabQuantity;
+    public static EditText nearestMed, tabName, tabQuantity;
     Button submit;
     RecyclerView tabsRecycler;
     RecyclerView.Adapter mAdapter;
@@ -50,6 +52,7 @@ public class MedicalShopActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST = 0;
     private static final int RESULT_LOAD_IMAGE = 1855;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,13 +102,20 @@ public class MedicalShopActivity extends AppCompatActivity {
                 clickImage();
             }
         });
+
+        locateMed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MedicalShopActivity.this, MapsActivity.class));
+            }
+        });
     }
 
     private void clickImage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
         } else {
-            Intent intent = new Intent (android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, RESULT_LOAD_IMAGE);
         }
     }
@@ -119,7 +129,7 @@ public class MedicalShopActivity extends AppCompatActivity {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, RESULT_LOAD_IMAGE);
             } else {
-                Toast.makeText(this,"Permission Denied! Please restart the app to use this feature.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission Denied! Please restart the app to use this feature.", Toast.LENGTH_SHORT).show();
             }
         }
     }

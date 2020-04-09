@@ -35,4 +35,7 @@
     <string name="add_items_to_your_grocery_list">Add items to your grocery list</string>
     <string name="item_name">Item name</string>
     <string name="quantity_in_kgs">Quantity (in kgs)</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_places_key">AIzaSyA-jTNigOJ8f3zQ6qketJ1QRVLTy7rkduo</string>
+    <string name="search">Search</string>
 </resources>

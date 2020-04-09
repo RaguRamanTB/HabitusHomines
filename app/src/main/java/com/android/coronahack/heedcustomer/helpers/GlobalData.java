@@ -16,4 +16,8 @@ public class GlobalData {
 
     public static double latitude;
     public static double longitude;
+
+    public static String medicalShopName = "";
+    public static String medicalShopAddress = "";
+
 }
