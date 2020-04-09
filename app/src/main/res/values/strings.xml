@@ -29,4 +29,10 @@
     <string name="submit">SUBMIT</string>
     <string name="sample_tablet">Sample tablet</string>
     <string name="_40">40</string>
+    <string name="prescription_image">Prescription Image</string>
+    <string name="select_your_nearest_grocery_store">Select your nearest grocery store</string>
+    <string name="your_nearest_grocery_store">Your nearest grocery store</string>
+    <string name="add_items_to_your_grocery_list">Add items to your grocery list</string>
+    <string name="item_name">Item name</string>
+    <string name="quantity_in_kgs">Quantity (in kgs)</string>
 </resources>
