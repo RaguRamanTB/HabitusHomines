@@ -25,7 +25,7 @@ import java.util.List;
 public class GroceryStoreActivity extends AppCompatActivity {
 
     ImageView locateG, addG, removeG;
-    public static EditText nearestG, gName, gQuantity;
+    public static EditText nearestG, gName, gQuantity, gPhNum;
     Button submitG;
     RecyclerView gRecycler;
     RecyclerView.Adapter gAdapter;
@@ -52,6 +52,7 @@ public class GroceryStoreActivity extends AppCompatActivity {
         nearestG = findViewById(R.id.nearestG);
         gName = findViewById(R.id.gName);
         gQuantity = findViewById(R.id.gQuantity);
+        gPhNum = findViewById(R.id.gPhNum);
         submitG = findViewById(R.id.submitGrocery);
         gRecycler = findViewById(R.id.gRecycler);
 

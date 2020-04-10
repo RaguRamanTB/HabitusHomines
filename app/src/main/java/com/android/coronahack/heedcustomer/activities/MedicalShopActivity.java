@@ -2,6 +2,7 @@ package com.android.coronahack.heedcustomer.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,7 +47,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class MedicalShopActivity extends AppCompatActivity {
 
     ImageView locateMed, addTab, removeTab, uploadPrescription, uploadedPrescription;
-    public static EditText nearestMed, tabName, tabQuantity;
+    public static EditText nearestMed, tabName, tabQuantity, phNum;
     Button submit;
     RecyclerView tabsRecycler;
     RecyclerView.Adapter mAdapter;
@@ -76,6 +79,7 @@ public class MedicalShopActivity extends AppCompatActivity {
         uploadedPrescription = findViewById(R.id.uploadedPrescriptionImage);
         tabName = findViewById(R.id.tabName);
         tabQuantity = findViewById(R.id.tabQuantity);
+        phNum = findViewById(R.id.phNum);
         submit = findViewById(R.id.submit);
         tabsRecycler = findViewById(R.id.tabsRecycler);
 
@@ -111,6 +115,48 @@ public class MedicalShopActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitRequest();
+            }
+        });
+    }
+
+    private void submitRequest() {
+        String nMed, nPhNum;
+        nMed = nearestMed.getText().toString();
+        nPhNum = phNum.getText().toString();
+
+        if (nMed.length() == 0 || nPhNum.length() == 0 || nPhNum.equals(" ")) {
+            Toast.makeText(MedicalShopActivity.this, "Selected shop and phone number are mandatory.", Toast.LENGTH_SHORT).show();
+        } else if (nPhNum.length() != 10) {
+            Toast.makeText(MedicalShopActivity.this, "Enter valid phone number!", Toast.LENGTH_SHORT).show();
+        } else if (!hasImage(locateMed)) {
+            AlertDialog alertDialogError;
+            AlertDialog.Builder builderError = new AlertDialog.Builder(MedicalShopActivity.this);
+            builderError.setMessage("You have not given the prescription, please ensure that the tablets you have entered do not require prescription. If found fraud, your request will be cancelled!")
+                    .setCancelable(true);
+            alertDialogError = builderError.create();
+            alertDialogError.setTitle("Reminder");
+            alertDialogError.show();
+        } else if (enterMedsList.size() == 0) {
+            Toast.makeText(MedicalShopActivity.this, "You have entered no medicines.", Toast.LENGTH_SHORT).show();
+        } else {
+
+        }
+    }
+
+    private boolean hasImage(@NonNull ImageView view) {
+        Drawable drawable = view.getDrawable();
+        boolean hasImage = (drawable != null);
+
+        if (hasImage && (drawable instanceof BitmapDrawable)) {
+            hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
+        }
+
+        return hasImage;
     }
 
     private void clickImage() {

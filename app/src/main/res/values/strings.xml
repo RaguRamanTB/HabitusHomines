@@ -38,4 +38,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="google_places_key">AIzaSyA-jTNigOJ8f3zQ6qketJ1QRVLTy7rkduo</string>
     <string name="search">Search</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="your_phone_number">Your phone number</string>
 </resources>

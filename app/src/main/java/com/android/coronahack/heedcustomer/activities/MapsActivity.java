@@ -140,13 +140,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             GlobalData.groceryShopAddress = marker.getSnippet();
             GroceryStoreActivity.nearestG.setText(GlobalData.groceryShopName + "\n" + GlobalData.groceryShopAddress);
         }
-        AlertDialog alertDialogError;
-        AlertDialog.Builder builderError = new AlertDialog.Builder(MapsActivity.this);
-        builderError.setMessage("Please press back once you have selected your nearest shop!")
-                .setCancelable(true);
-        alertDialogError = builderError.create();
-        alertDialogError.setTitle("Reminder");
-        alertDialogError.show();
+        Toast.makeText(this, "Please press back once you have selected your nearest shop!",Toast.LENGTH_SHORT).show();
         return false;
     }
 

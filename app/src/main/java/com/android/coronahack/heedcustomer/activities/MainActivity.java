@@ -8,8 +8,12 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -21,6 +25,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.ResultReceiver;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView medicalShop, groceryStore;
     TextView welcomeText;
 
+//    Button bluetooth;
+//    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
     AlertDialog.Builder builder;
     AlertDialog alertDialog = null;
 
@@ -70,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
         welcomeText = findViewById(R.id.welcome_text);
         medicalShop = findViewById(R.id.medicineButton);
         groceryStore = findViewById(R.id.groceriesButton);
+//        bluetooth = findViewById(R.id.bt);
+
+//        registerReceiver(receiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
 
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstStart = sharedPreferences.getBoolean("firstStart", true);
@@ -110,7 +121,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+//        bluetooth.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                bluetoothAdapter.startDiscovery();
+//            }
+//        });
     }
+
+//    private BroadcastReceiver receiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
+//                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+//                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+//                TextView rssi_msg = (TextView) findViewById(R.id.btText);
+//                rssi_msg.setText(rssi_msg.getText() + name + " => " + rssi + "dBm\n");
+//                Log.d("Bluetooth", name + " => "+ rssi);
+//            }
+//        }
+//    };
 
     private void startRegistration() {
         ViewGroup viewGroup = findViewById(android.R.id.content);
