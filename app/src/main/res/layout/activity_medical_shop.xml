@@ -292,15 +292,13 @@
 <!--                android:contentDescription="@string/prescription_image" />-->
 
 
-            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+            <ProgressBar
                 android:id="@+id/upload_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:mpb_progressStyle="horizontal"
                 android:layout_marginTop="10dp"
-                style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
-                app:mpb_progressBackgroundTint="@color/textWhite"
-                app:mpb_progressTint="@color/colorAccent" />
+                android:visibility="invisible"
+                android:progressTint="@color/colorAccent"/>
 
             <Button
                 android:id="@+id/submit"
