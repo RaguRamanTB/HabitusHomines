@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     ResultReceiver resultReceiver;
     ProgressBar progressBar;
-    ImageView medicalShop, groceryStore;
+    ImageView medicalShop, groceryStore, notification;
     TextView welcomeText;
 
 //    Button bluetooth;
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         welcomeText = findViewById(R.id.welcome_text);
         medicalShop = findViewById(R.id.medicineButton);
         groceryStore = findViewById(R.id.groceriesButton);
+        notification = findViewById(R.id.notification);
 //        bluetooth = findViewById(R.id.bt);
 
 //        registerReceiver(receiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
@@ -122,12 +123,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getRequestStatus();
+            }
+        });
+
 //        bluetooth.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                bluetoothAdapter.startDiscovery();
 //            }
 //        });
+    }
+
+    private void getRequestStatus() {
+        startActivity(new Intent(MainActivity.this, NotificationActivity.class));
     }
 
 //    private BroadcastReceiver receiver = new BroadcastReceiver() {

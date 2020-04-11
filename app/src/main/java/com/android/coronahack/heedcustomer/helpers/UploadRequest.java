@@ -7,6 +7,10 @@ public class UploadRequest {
     public int mKey;
     public List<EnterMeds> mList;
 
+    public UploadRequest () {
+
+    }
+
     public UploadRequest(String shopName, String customerName, String phNum, String customerAddress, List<EnterMeds> mList, int mKey, String timeSlot) {
         this.shopName = shopName;
         this.customerName = customerName;

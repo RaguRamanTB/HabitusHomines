@@ -1,164 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     tools:context=".activities.MainActivity">
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/notification"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/notification"
+        android:contentDescription="@string/notification_icon" />
+
+    <ScrollView
+        android:layout_below="@+id/notification"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        tools:ignore="UselessParent">
 
-        <FrameLayout
-            android:id="@+id/icon_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/circle_background"
-            android:padding="30dp">
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/stay_home" />
-
-        </FrameLayout>
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_view_container"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/icon_circle"
-            android:layout_marginTop="10dp">
+            android:layout_gravity="center">
 
-            <TextView
-                android:id="@+id/top_text"
+            <FrameLayout
+                android:id="@+id/icon_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/circle_background"
+                android:padding="30dp">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/stay_home" />
+
+            </FrameLayout>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/icon_circle"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/top_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/product_sans_bold"
+                    android:padding="10dp"
+                    android:text="@string/app_name"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/textBlack"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <TextView
+                android:id="@+id/welcome_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/shimmer_view_container"
                 android:fontFamily="@font/product_sans_bold"
+                android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/app_name"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textColor="@color/textBlack"
-                android:textSize="35sp"
-                android:textStyle="bold" />
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <TextView
-            android:id="@+id/welcome_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/shimmer_view_container"
-            android:fontFamily="@font/product_sans_bold"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/welcome_guest"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/chooseText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/welcome_text"
-            android:fontFamily="@font/product_sans_bold"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/choose_an_option"
-            android:textColor="@color/textBlack"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:id="@+id/images"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_below="@+id/chooseText"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="15dp"
-            android:weightSum="2">
-
-            <ImageView
-                android:id="@+id/medicineButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="@string/tabsimage"
-                android:padding="10dp"
-                android:src="@drawable/medicine" />
-
-            <ImageView
-                android:id="@+id/groceriesButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="@string/tabsimage"
-                android:padding="10dp"
-                android:src="@drawable/groceries" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/texts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/images"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:text="@string/medical_shop"
-                android:textAlignment="center"
-                android:textColor="@color/textBlack"
+                android:text="@string/welcome_guest"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/chooseText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_below="@+id/welcome_text"
+                android:fontFamily="@font/product_sans_bold"
+                android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/grocery_store"
-                android:textAlignment="center"
+                android:text="@string/choose_an_option"
                 android:textColor="@color/textBlack"
-                android:textStyle="bold" />
+                android:textSize="20sp" />
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/images"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/chooseText"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:weightSum="2">
 
-<!--        <Button-->
-<!--            android:id="@+id/bt"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/texts"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:background="@drawable/button"-->
-<!--            android:gravity="center"-->
-<!--            android:padding="10dp"-->
-<!--            android:text="@string/bluetooth"-->
-<!--            android:textStyle="bold" />-->
+                <ImageView
+                    android:id="@+id/medicineButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/tabsimage"
+                    android:padding="10dp"
+                    android:src="@drawable/medicine" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/btText"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/bt"-->
-<!--            android:gravity="center"-->
-<!--            android:padding="10dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:textColor="@color/textBlack"-->
-<!--            android:textSize="20sp" />-->
+                <ImageView
+                    android:id="@+id/groceriesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/tabsimage"
+                    android:padding="10dp"
+                    android:src="@drawable/groceries" />
 
-    </RelativeLayout>
+            </LinearLayout>
 
-</ScrollView>
+            <LinearLayout
+                android:id="@+id/texts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/images"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="@string/medical_shop"
+                    android:textAlignment="center"
+                    android:textColor="@color/textBlack"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="@string/grocery_store"
+                    android:textAlignment="center"
+                    android:textColor="@color/textBlack"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!--        <Button-->
+            <!--            android:id="@+id/bt"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_below="@+id/texts"-->
+            <!--            android:layout_centerHorizontal="true"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:background="@drawable/button"-->
+            <!--            android:gravity="center"-->
+            <!--            android:padding="10dp"-->
+            <!--            android:text="@string/bluetooth"-->
+            <!--            android:textStyle="bold" />-->
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/btText"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_below="@+id/bt"-->
+            <!--            android:gravity="center"-->
+            <!--            android:padding="10dp"-->
+            <!--            android:layout_marginTop="10dp"-->
+            <!--            android:textColor="@color/textBlack"-->
+            <!--            android:textSize="20sp" />-->
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
