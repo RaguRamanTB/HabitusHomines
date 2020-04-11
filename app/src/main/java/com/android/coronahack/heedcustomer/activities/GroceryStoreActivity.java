@@ -109,7 +109,7 @@ public class GroceryStoreActivity extends AppCompatActivity {
             if (enterGList.size() == 0) {
                 Toast.makeText(GroceryStoreActivity.this, "Your grocery list is empty!", Toast.LENGTH_SHORT).show();
             } else {
-                UploadRequest uploadRequest = new UploadRequest(nearestG.getText().toString(), GlobalData.name, gPhNum.getText().toString(), GlobalData.address, enterGList);
+                UploadRequest uploadRequest = new UploadRequest(nearestG.getText().toString(), GlobalData.name, gPhNum.getText().toString(), GlobalData.address, enterGList, 0, "9:00 am to 9:30 am");
                 String uploadId = referencePrescription.push().getKey();
                 referencePrescription.child(uploadId)
                         .setValue(uploadRequest)

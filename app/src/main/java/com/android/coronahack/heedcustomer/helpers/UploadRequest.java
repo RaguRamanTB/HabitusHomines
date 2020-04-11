@@ -3,24 +3,29 @@ package com.android.coronahack.heedcustomer.helpers;
 import java.util.List;
 
 public class UploadRequest {
-    public String shopName, customerName, phNum, customerAddress, prescriptionLink, mKey;
+    public String shopName, customerName, phNum, customerAddress, prescriptionLink, timeSlot;
+    public int mKey;
     public List<EnterMeds> mList;
 
-    public UploadRequest(String shopName, String customerName, String phNum, String customerAddress, List<EnterMeds> mList) {
+    public UploadRequest(String shopName, String customerName, String phNum, String customerAddress, List<EnterMeds> mList, int mKey, String timeSlot) {
         this.shopName = shopName;
         this.customerName = customerName;
         this.phNum = phNum;
         this.customerAddress = customerAddress;
         this.mList = mList;
+        this.mKey = mKey;
+        this.timeSlot = timeSlot;
     }
 
-    public UploadRequest(String shopName, String customerName, String phNum, String customerAddress, String prescriptionLink, List<EnterMeds> mList) {
+    public UploadRequest(String shopName, String customerName, String phNum, String customerAddress, String prescriptionLink, List<EnterMeds> mList, int mKey, String timeSlot) {
         this.shopName = shopName;
         this.customerName = customerName;
         this.phNum = phNum;
         this.customerAddress = customerAddress;
         this.prescriptionLink = prescriptionLink;
         this.mList = mList;
+        this.mKey = mKey;
+        this.timeSlot = timeSlot;
     }
 
     public String getShopName() {
@@ -63,12 +68,20 @@ public class UploadRequest {
         this.prescriptionLink = prescriptionLink;
     }
 
-    public String getmKey() {
+    public int getmKey() {
         return mKey;
     }
 
-    public void setmKey(String mKey) {
+    public void setmKey(int mKey) {
         this.mKey = mKey;
+    }
+
+    public String getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(String timeSlot) {
+        this.timeSlot = timeSlot;
     }
 
     public List<EnterMeds> getmList() {

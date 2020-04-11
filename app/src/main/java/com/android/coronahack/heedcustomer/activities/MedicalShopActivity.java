@@ -197,7 +197,7 @@ public class MedicalShopActivity extends AppCompatActivity {
                             storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    UploadRequest uploadRequest = new UploadRequest(nearestMed.getText().toString(), GlobalData.name, phNum.getText().toString(), GlobalData.address, uri.toString(), enterMedsList);
+                                    UploadRequest uploadRequest = new UploadRequest(nearestMed.getText().toString(), GlobalData.name, phNum.getText().toString(), GlobalData.address, uri.toString(), enterMedsList, 0, "9:00 am to 9:30 am");
                                     String uploadId = referencePrescription.push().getKey();
                                     referencePrescription.child(uploadId).setValue(uploadRequest);
                                 }
@@ -219,7 +219,7 @@ public class MedicalShopActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            UploadRequest uploadRequest = new UploadRequest(nearestMed.getText().toString(), GlobalData.name, phNum.getText().toString(), GlobalData.address, enterMedsList);
+            UploadRequest uploadRequest = new UploadRequest(nearestMed.getText().toString(), GlobalData.name, phNum.getText().toString(), GlobalData.address, enterMedsList, 0, "9:00 am to 9:30 am");
             String uploadId = referencePrescription.push().getKey();
             referencePrescription.child(uploadId)
                     .setValue(uploadRequest)
