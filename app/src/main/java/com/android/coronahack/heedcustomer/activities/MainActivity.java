@@ -91,10 +91,11 @@ public class MainActivity extends AppCompatActivity {
         GlobalData.gender = sharedPreferences.getString("gender", "NULL");
         GlobalData.isVolunteer = sharedPreferences.getString("isVolunteer", "0");
 
-        welcomeText.setText("Welcome, "+GlobalData.name.toUpperCase()+" !");
 
         if (firstStart) {
             startRegistration();
+        } else {
+            welcomeText.setText("Welcome, "+GlobalData.name.toUpperCase()+" !");
         }
 
         if (!isConnected()) {
@@ -209,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 String getName, getAge, getAddress, isVolunteer = "0";
@@ -232,6 +234,12 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("gender", gender.getText().toString());
                     editor.putString("isVolunteer", isVolunteer);
                     editor.apply();
+                    GlobalData.name = getName;
+                    GlobalData.age = getAge;
+                    GlobalData.address = getAddress;
+                    GlobalData.gender = gender.getText().toString();
+                    GlobalData.isVolunteer = isVolunteer;
+                    welcomeText.setText("Welcome, "+getName.toUpperCase()+" !");
                     alertDialog.cancel();
                 }
             }
