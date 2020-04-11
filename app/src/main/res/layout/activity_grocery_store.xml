@@ -107,7 +107,6 @@
                     android:id="@+id/gPhNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
                     android:inputType="number"
                     android:textColor="@color/textBlack"
                     android:textSize="18sp" />

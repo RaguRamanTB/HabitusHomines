@@ -35,8 +35,8 @@ public class EnterMedAdapter extends RecyclerView.Adapter<EnterMedAdapter.TabsVi
     public void onBindViewHolder(@NonNull EnterMedAdapter.TabsViewHolder holder, int position) {
         holder.itemView.setTag(enterMeds.get(position));
         EnterMeds em = enterMeds.get(position);
-        holder.nameTab.setText(em.getTabName());
-        holder.quantityTab.setText(em.getTabQuantity());
+        holder.nameTab.setText(em.getName());
+        holder.quantityTab.setText(em.getQuantity());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class EnterMedAdapter extends RecyclerView.Adapter<EnterMedAdapter.TabsVi
                 @Override
                 public void onClick(View v) {
                     EnterMeds enterMeds = (EnterMeds) v.getTag();
-                    Toast.makeText(v.getContext(), enterMeds.getTabName()+" -> "+enterMeds.getTabQuantity(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), enterMeds.getName()+" -> "+enterMeds.getQuantity(), Toast.LENGTH_SHORT).show();
                 }
             });
 

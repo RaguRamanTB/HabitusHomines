@@ -2,26 +2,26 @@ package com.android.coronahack.heedcustomer.helpers;
 
 public class EnterMeds {
 
-    private String tabName, tabQuantity;
+    private String name, quantity;
 
-    public EnterMeds(String tabName, String tabQuantity) {
-        this.tabName = tabName;
-        this.tabQuantity = tabQuantity;
+    public EnterMeds(String name, String quantity) {
+        this.name = name;
+        this.quantity = quantity;
     }
 
-    public String getTabName() {
-        return tabName;
+    public String getName() {
+        return name;
     }
 
-    public void setTabName(String tabName) {
-        this.tabName = tabName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTabQuantity() {
-        return tabQuantity;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setTabQuantity(String tabQuantity) {
-        this.tabQuantity = tabQuantity;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 }

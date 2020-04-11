@@ -107,7 +107,6 @@
                     android:id="@+id/phNum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
                     android:inputType="number"
                     android:textColor="@color/textBlack"
                     android:textSize="18sp" />
@@ -252,18 +251,56 @@
                     android:background="@drawable/button"
                     android:contentDescription="@string/camera_button"
                     android:padding="8dp"
-                    android:src="@drawable/camera"
+                    android:src="@drawable/upload"
                     android:tint="@color/colorAccent" />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/uploadedPrescriptionImage"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/prescription_image" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/box200"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:layout_marginTop="10dp"
+                android:hint="@string/your_prescription"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                app:boxStrokeColor="@color/colorAccent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/prescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:textColor="@color/textBlack"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <ImageView-->
+<!--                android:id="@+id/uploadedPrescriptionImage"-->
+<!--                android:layout_width="300dp"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:contentDescription="@string/prescription_image" />-->
+
+
+            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                android:id="@+id/upload_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mpb_progressStyle="horizontal"
+                android:layout_marginTop="10dp"
+                style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+                app:mpb_progressBackgroundTint="@color/textWhite"
+                app:mpb_progressTint="@color/colorAccent" />
 
             <Button
                 android:id="@+id/submit"

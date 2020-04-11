@@ -1,5 +1,6 @@
 package com.android.coronahack.heedcustomer.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,11 @@ import com.android.coronahack.heedcustomer.R;
 import com.android.coronahack.heedcustomer.helpers.EnterMedAdapter;
 import com.android.coronahack.heedcustomer.helpers.EnterMeds;
 import com.android.coronahack.heedcustomer.helpers.GlobalData;
+import com.android.coronahack.heedcustomer.helpers.UploadRequest;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -30,6 +36,7 @@ public class GroceryStoreActivity extends AppCompatActivity {
     RecyclerView gRecycler;
     RecyclerView.Adapter gAdapter;
     List<EnterMeds> enterGList;
+    DatabaseReference referencePrescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +62,7 @@ public class GroceryStoreActivity extends AppCompatActivity {
         gPhNum = findViewById(R.id.gPhNum);
         submitG = findViewById(R.id.submitGrocery);
         gRecycler = findViewById(R.id.gRecycler);
+        referencePrescription = FirebaseDatabase.getInstance().getReference().child("groceries");
 
         enterGList = new ArrayList<>();
         gRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -81,6 +89,38 @@ public class GroceryStoreActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        submitG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitRequest();
+            }
+        });
+    }
+
+    private void submitRequest() {
+        String gName, gPh;
+        gName = nearestG.getText().toString();
+        gPh = gPhNum.getText().toString();
+
+        if (gName.length() == 0 || gPh.equals(" ") || gPh.length() == 0) {
+            Toast.makeText(GroceryStoreActivity.this, "Selected shop and phone number are mandatory.", Toast.LENGTH_SHORT).show();
+        } else {
+            if (enterGList.size() == 0) {
+                Toast.makeText(GroceryStoreActivity.this, "Your grocery list is empty!", Toast.LENGTH_SHORT).show();
+            } else {
+                UploadRequest uploadRequest = new UploadRequest(nearestG.getText().toString(), GlobalData.name, gPhNum.getText().toString(), GlobalData.address, enterGList);
+                String uploadId = referencePrescription.push().getKey();
+                referencePrescription.child(uploadId)
+                        .setValue(uploadRequest)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(GroceryStoreActivity.this, "Request successful! Please wait for the shop to confirm and allot you a slot.", Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+        }
     }
 
     private void removeGroceries() {
