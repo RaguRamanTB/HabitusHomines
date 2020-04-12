@@ -45,4 +45,8 @@
     <string name="shop">Shop :</string>
     <string name="status">Status :</string>
     <string name="time_slot">Time slot :</string>
+    <string name="payment_page">Payment page</string>
+    <string name="we_request">We request you to pay through online, as CORONA can spread through cash as well</string>
+    <string name="please_select_volunteer">Please select VOLUNTEER REQUEST only if you suffer from any disability / if you are an elderly person</string>
+    <string name="volunteer_request">Volunteer request</string>
 </resources>

@@ -1,11 +1,11 @@
 package com.android.coronahack.heedcustomer.helpers;
 
 public class GlobalData {
-    public static String name;
-    public static String age;
-    public static String address;
-    public static String gender;
-    public static String isVolunteer;
+    public static String name = "";
+    public static String age = "";
+    public static String address = "";
+    public static String gender = "";
+    public static String isVolunteer = "";
 
     private static final String PACKAGE_NAME = "com.android.coronahack.heedcustomer.activities";
     public static final String RESULT_DATA_KEY = PACKAGE_NAME + ".RESULT_DATA_KEY";

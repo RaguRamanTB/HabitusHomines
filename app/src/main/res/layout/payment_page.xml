@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/registerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:fontFamily="@font/product_sans_bold"
+            android:padding="20dp"
+            android:text="@string/payment_page"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/textWhite"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/registerText"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/product_sans_bold"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/we_request"
+                android:textAlignment="center"
+                android:textColor="@color/textBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:weightSum="3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/gPay"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/gpay"
+                    android:padding="10dp"
+                    android:layout_height="150dp"/>
+
+                <ImageView
+                    android:id="@+id/phonePe"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/phonepe"
+                    android:padding="10dp"
+                    android:layout_height="150dp"/>
+
+                <ImageView
+                    android:id="@+id/payTm"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/paytm"
+                    android:padding="10dp"
+                    android:layout_height="150dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/please_select_volunteer"
+                android:textColor="@color/textBlack"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/volunteerButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button"
+                android:padding="10dp"
+                android:text="@string/volunteer_request"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

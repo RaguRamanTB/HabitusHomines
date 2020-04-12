@@ -7,7 +7,6 @@
 
     <LinearLayout
         android:id="@+id/type"
-        android:padding="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="2">
@@ -43,7 +42,6 @@
         android:background="@color/colorAccent"/>
 
     <LinearLayout
-        android:padding="7dp"
         android:id="@+id/shopName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,7 +72,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:padding="7dp"
         android:id="@+id/request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,7 +102,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:padding="7dp"
         android:id="@+id/timeSlot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
