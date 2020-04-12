@@ -35,9 +35,16 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileOverlayOptions;
+import com.google.maps.android.heatmaps.HeatmapTileProvider;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener {
 
@@ -60,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
-        handler  = new Handler();
+        handler = new Handler();
         startRepeatingTask();
 
         Bundle extras = getIntent().getExtras();
@@ -110,6 +117,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         LocationServices.FusedLocationApi.requestLocationUpdates(client, request, this);
+
     }
 
     @Override
@@ -124,6 +132,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void findMedicalShops() {
         mMap.setOnMarkerClickListener(this);
+
+        ArrayList<LatLng> latLngs = new ArrayList<>();
+        latLngs.add(new LatLng(9.917788, 78.125445));
+        latLngs.add(new LatLng(9.921613, 78.128558));
+        latLngs.add(new LatLng(9.922311, 78.124949));
+        latLngs.add(new LatLng(9.914934, 78.128967));
+        latLngs.add(new LatLng(9.924298, 78.12083));
+
+        HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
+                .data(latLngs)
+                .build();
+
+        TileOverlay mOverlay = mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
 
         StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         stringBuilder.append("location=" + latLng.latitude + "," + latLng.longitude);
@@ -156,7 +177,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             GlobalData.groceryShopAddress = marker.getSnippet();
             GroceryStoreActivity.nearestG.setText(GlobalData.groceryShopName + "\n" + GlobalData.groceryShopAddress);
         }
-        Toast.makeText(this, "Please press back once you have selected your nearest shop!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Please press back once you have selected your nearest shop!", Toast.LENGTH_SHORT).show();
         return false;
     }
 
@@ -196,10 +217,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
-                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
                 String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-                Log.d("Bluetooth", name + " => "+ rssi);
+                Log.d("Bluetooth", name + " => " + rssi);
                 if (rssi > -68) {
                     ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
                     toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 2000);
