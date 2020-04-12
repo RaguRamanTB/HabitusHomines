@@ -19,6 +19,8 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -64,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
     TextView welcomeText;
 
 //    Button bluetooth;
-//    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+    Handler handler;
 
     AlertDialog.Builder builder;
     AlertDialog alertDialog = null;
@@ -79,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         medicalShop = findViewById(R.id.medicineButton);
         groceryStore = findViewById(R.id.groceriesButton);
         notification = findViewById(R.id.notification);
-//        bluetooth = findViewById(R.id.bt);
 
-//        registerReceiver(receiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+        handler  = new Handler();
+        startRepeatingTask();
 
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE);
         boolean firstStart = sharedPreferences.getBoolean("firstStart", true);
@@ -139,23 +143,52 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                registerReceiver(receiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+                bluetoothAdapter.startDiscovery();
+            } finally {
+                handler.postDelayed(runnable, 1000);
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopRepeatingTask();
+    }
+
+    private void stopRepeatingTask() {
+        handler.removeCallbacks(runnable);
+    }
+
+    private void startRepeatingTask() {
+        runnable.run();
+    }
+
     private void getRequestStatus() {
         startActivity(new Intent(MainActivity.this, NotificationActivity.class));
     }
 
-//    private BroadcastReceiver receiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            String action = intent.getAction();
-//            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
-//                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
-//                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-//                TextView rssi_msg = (TextView) findViewById(R.id.btText);
-//                rssi_msg.setText(rssi_msg.getText() + name + " => " + rssi + "dBm\n");
-//                Log.d("Bluetooth", name + " => "+ rssi);
-//            }
-//        }
-//    };
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
+                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+                Log.d("Bluetooth", name + " => "+ rssi);
+                if (rssi > -68) {
+                    ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 2000);
+                    Toast.makeText(MainActivity.this, "Please maintain distance from others!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    };
 
     private void startRegistration() {
         ViewGroup viewGroup = findViewById(android.R.id.content);

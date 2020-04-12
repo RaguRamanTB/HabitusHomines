@@ -12,15 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -63,12 +72,18 @@ public class MedicalShopActivity extends AppCompatActivity {
     StorageTask mUploadTask;
     DatabaseReference referencePrescription;
     ProgressBar progressBar;
+    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    Handler handler;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_shop);
+
+
+        handler  = new Handler();
+        startRepeatingTask();
 
         Toolbar toolbar = findViewById(R.id.buyMedicine);
         toolbar.setTitle("Buy Medicine");
@@ -138,6 +153,50 @@ public class MedicalShopActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                registerReceiver(receiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+                bluetoothAdapter.startDiscovery();
+            } finally {
+                handler.postDelayed(runnable, 1000);
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopRepeatingTask();
+    }
+
+    private void stopRepeatingTask() {
+        handler.removeCallbacks(runnable);
+    }
+
+    private void startRepeatingTask() {
+        runnable.run();
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
+                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+                Log.d("Bluetooth", name + " => "+ rssi);
+                if (rssi > -68) {
+                    ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 2000);
+                    Toast.makeText(MedicalShopActivity.this, "Please maintain distance from others!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    };
 
     private void openImage() {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT);
