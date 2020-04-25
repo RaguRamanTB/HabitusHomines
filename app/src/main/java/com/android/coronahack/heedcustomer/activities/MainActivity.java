@@ -62,10 +62,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     ResultReceiver resultReceiver;
     ProgressBar progressBar;
-    ImageView medicalShop, groceryStore, notification;
+    ImageView medicalShop, groceryStore, notification, ideas, info;
     TextView welcomeText;
 
-//    Button bluetooth;
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
     Handler handler;
@@ -83,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         medicalShop = findViewById(R.id.medicineButton);
         groceryStore = findViewById(R.id.groceriesButton);
         notification = findViewById(R.id.notification);
+        ideas = findViewById(R.id.ideaButton);
+        info = findViewById(R.id.infoButton);
 
         handler  = new Handler();
         startRepeatingTask();
@@ -135,12 +136,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        bluetooth.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                bluetoothAdapter.startDiscovery();
-//            }
-//        });
+        ideas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, IdeasActivity.class));
+            }
+        });
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, InfoActivity.class));
+            }
+        });
     }
 
     Runnable runnable = new Runnable() {

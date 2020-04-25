@@ -24,7 +24,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.NotificationActivity"></activity>
+        <activity android:name=".activities.InfoActivity"></activity>
+        <activity android:name=".activities.IdeasActivity" />
+        <activity android:name=".activities.NotificationActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

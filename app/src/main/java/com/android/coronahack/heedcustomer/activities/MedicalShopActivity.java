@@ -81,7 +81,6 @@ public class MedicalShopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_shop);
 
-
         handler  = new Handler();
         startRepeatingTask();
 
@@ -284,49 +283,10 @@ public class MedicalShopActivity extends AppCompatActivity {
         }
     }
 
-//    private boolean hasImage(@NonNull ImageView view) {
-//        Drawable drawable = view.getDrawable();
-//        boolean hasImage = (drawable != null);
-//
-//        if (hasImage && (drawable instanceof BitmapDrawable)) {
-//            hasImage = ((BitmapDrawable)drawable).getBitmap() != null;
-//        }
-//
-//        return hasImage;
-//    }
-//    private void clickImage() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//            requestPermissions(new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST);
-//        } else {
-//            Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//            startActivityForResult(intent, RESULT_LOAD_IMAGE);
-//        }
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//
-//        if (requestCode == PERMISSION_REQUEST) {
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//                startActivityForResult(cameraIntent, RESULT_LOAD_IMAGE);
-//            } else {
-//                Toast.makeText(this, "Permission Denied! Please restart the app to use this feature.", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-//
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if ((requestCode == RESULT_LOAD_IMAGE) && (resultCode == Activity.RESULT_OK)) {
-//            assert data != null;
-//            Bitmap photo = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
-//            uploadedPrescription.setImageBitmap(photo);
-//        }
         assert data != null;
         if (requestCode == 101 && resultCode == RESULT_OK && data.getData() != null) {
             imageUri = data.getData();

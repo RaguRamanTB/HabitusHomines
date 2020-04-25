@@ -49,4 +49,12 @@
     <string name="we_request">We request you to pay through online, as CORONA can spread through cash as well</string>
     <string name="please_select_volunteer">Please select VOLUNTEER REQUEST only if you suffer from any disability / if you are an elderly person</string>
     <string name="volunteer_request">Volunteer request</string>
+    <string name="idea_image">Idea Image</string>
+    <string name="learn_about_covid_19">LEARN ABOUT COVID-19</string>
+    <string name="virus_image">Virus image</string>
+    <string name="some_of_the_previous_ideas">Some of the previous ideas</string>
+    <string name="give_your_idea_here">Give your idea here</string>
+    <string name="content_of_the_idea">Content of the idea</string>
+    <string name="title_of_the_idea">Title of the idea (Please don\'t give existing titles)</string>
+    <string name="submit_idea">Submit idea</string>
 </resources>
