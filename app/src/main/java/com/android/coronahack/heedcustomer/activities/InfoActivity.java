@@ -52,6 +52,13 @@ public class InfoActivity extends AppCompatActivity {
 
     private void stopRepeatingTask() {
         handler.removeCallbacks(runnable);
+        try {
+            if (receiver != null) {
+                unregisterReceiver(receiver);
+            }
+        } catch (Exception e) {
+            Log.d("Unregister", e.toString());
+        }
     }
 
     private void startRepeatingTask() {
