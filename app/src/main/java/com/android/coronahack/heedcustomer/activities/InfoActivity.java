@@ -82,6 +82,21 @@ public class InfoActivity extends AppCompatActivity {
         m.setGridText("Watch videos");
         menuItems.add(m);
 
+        m = new GridItem();
+        m.setGridPicture(R.drawable.technical);
+        m.setGridText("Technical guidance");
+        menuItems.add(m);
+
+        m = new GridItem();
+        m.setGridPicture(R.drawable.strategic);
+        m.setGridText("Strategies, plans and operations");
+        menuItems.add(m);
+
+        m = new GridItem();
+        m.setGridPicture(R.drawable.training);
+        m.setGridText("Training and exercises");
+        menuItems.add(m);
+
         return menuItems;
     }
 
