@@ -1,6 +1,7 @@
 package com.android.coronahack.heedcustomer.helpers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.coronahack.heedcustomer.R;
+import com.android.coronahack.heedcustomer.activities.ViewActivity;
 
 import java.util.ArrayList;
 
@@ -56,7 +58,10 @@ public class GridAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 switch (menu.getGridText().toLowerCase()) {
-                    case "":
+                    case "when and how to use masks":
+                        Intent intent = new Intent(c, ViewActivity.class);
+                        intent.putExtra("link", "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/when-and-how-to-use-masks");
+                        c.startActivity(intent);
                         break;
 
                     default:
