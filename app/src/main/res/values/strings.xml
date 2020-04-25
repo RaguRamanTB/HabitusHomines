@@ -57,4 +57,6 @@
     <string name="content_of_the_idea">Content of the idea</string>
     <string name="title_of_the_idea">Title of the idea (Please don\'t give existing titles)</string>
     <string name="submit_idea">Submit idea</string>
+    <string name="coronavirus_disease_covid_19_pandemic">Coronavirus disease (COVID-19) Pandemic</string>
+    <string name="we_collect_every_information_from_world_health_organization_s_who_official_website">We collect every information from World Health Organization\'s (WHO) official website.</string>
 </resources>

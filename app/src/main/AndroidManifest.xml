@@ -24,7 +24,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.InfoActivity"></activity>
+        <activity android:name=".activities.ViewActivity"></activity>
+        <activity android:name=".activities.InfoActivity" />
         <activity android:name=".activities.IdeasActivity" />
         <activity android:name=".activities.NotificationActivity" />
         <!--
