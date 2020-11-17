@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOCATION_PERMISSION = 1;
     ResultReceiver resultReceiver;
     ProgressBar progressBar;
-    ImageView medicalShop, groceryStore, notification, ideas, info;
+    ImageView medicalShop, groceryStore, notification;
+//    ImageView info;
+    ImageView outletFinder;
     TextView welcomeText;
 
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -82,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
         medicalShop = findViewById(R.id.medicineButton);
         groceryStore = findViewById(R.id.groceriesButton);
         notification = findViewById(R.id.notification);
-        ideas = findViewById(R.id.ideaButton);
-        info = findViewById(R.id.infoButton);
+        outletFinder = findViewById(R.id.outletFinder);
+//        info = findViewById(R.id.infoButton);
 
-        handler  = new Handler();
+        handler = new Handler();
         startRepeatingTask();
 
         SharedPreferences sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE);
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         if (firstStart) {
             startRegistration();
         } else {
-            welcomeText.setText("Welcome, "+GlobalData.name.toUpperCase()+" !");
+            welcomeText.setText("Welcome, " + GlobalData.name.toUpperCase() + " !");
         }
 
         if (!isConnected()) {
@@ -136,19 +138,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ideas.setOnClickListener(new View.OnClickListener() {
+        outletFinder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, IdeasActivity.class));
+                startActivity(new Intent(MainActivity.this, OutletFinderActivity.class));
             }
         });
 
-        info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, InfoActivity.class));
-            }
-        });
+//        info.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, InfoActivity.class));
+//            }
+//        });
     }
 
     Runnable runnable = new Runnable() {
@@ -192,10 +194,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
-                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
                 String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-                Log.d("Bluetooth", name + " => "+ rssi);
+                Log.d("Bluetooth", name + " => " + rssi);
                 if (rssi > -68) {
                     ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
                     toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 2000);
@@ -287,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
                     GlobalData.address = getAddress;
                     GlobalData.gender = gender.getText().toString();
                     GlobalData.isVolunteer = isVolunteer;
-                    welcomeText.setText("Welcome, "+getName.toUpperCase()+" !");
+                    welcomeText.setText("Welcome, " + getName.toUpperCase() + " !");
                     alertDialog.cancel();
                 }
             }
@@ -323,26 +325,31 @@ public class MainActivity extends AppCompatActivity {
         locationRequest.setFastestInterval(3000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        LocationServices.getFusedLocationProviderClient(MainActivity.this)
-                .requestLocationUpdates(locationRequest, new LocationCallback() {
-                    @Override
-                    public void onLocationResult(LocationResult locationResult) {
-                        super.onLocationResult(locationResult);
-                        LocationServices.getFusedLocationProviderClient(MainActivity.this)
-                                .removeLocationUpdates(this);
-                        if (locationResult != null && locationResult.getLocations().size() > 0) {
-                            int latestLocationIndex = locationResult.getLocations().size() - 1;
-                            GlobalData.latitude = locationResult.getLocations().get(latestLocationIndex).getLatitude();
-                            GlobalData.longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
-                            Location location = new Location("providerNA");
-                            location.setLatitude(GlobalData.latitude);
-                            location.setLongitude(GlobalData.longitude);
-                            fetchAddressFromLatLong(location);
-                        } else {
-                            progressBar.setVisibility(View.GONE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Grant Permission to continue", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            LocationServices.getFusedLocationProviderClient(MainActivity.this)
+                    .requestLocationUpdates(locationRequest, new LocationCallback() {
+                        @Override
+                        public void onLocationResult(LocationResult locationResult) {
+                            super.onLocationResult(locationResult);
+                            LocationServices.getFusedLocationProviderClient(MainActivity.this)
+                                    .removeLocationUpdates(this);
+                            if (locationResult != null && locationResult.getLocations().size() > 0) {
+                                int latestLocationIndex = locationResult.getLocations().size() - 1;
+                                GlobalData.latitude = locationResult.getLocations().get(latestLocationIndex).getLatitude();
+                                GlobalData.longitude = locationResult.getLocations().get(latestLocationIndex).getLongitude();
+                                Location location = new Location("providerNA");
+                                location.setLatitude(GlobalData.latitude);
+                                location.setLongitude(GlobalData.longitude);
+                                fetchAddressFromLatLong(location);
+                            } else {
+                                progressBar.setVisibility(View.GONE);
+                            }
                         }
-                    }
-                }, Looper.getMainLooper());
+                    }, Looper.getMainLooper());
+        }
     }
 
     private void fetchAddressFromLatLong(Location location) {

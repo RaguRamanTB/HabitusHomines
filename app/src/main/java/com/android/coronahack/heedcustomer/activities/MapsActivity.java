@@ -3,8 +3,10 @@ package com.android.coronahack.heedcustomer.activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -12,6 +14,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -116,8 +119,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         request.setInterval(50000);
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        LocationServices.FusedLocationApi.requestLocationUpdates(client, request, this);
-
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Allow location services to continue.", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            LocationServices.FusedLocationApi.requestLocationUpdates(client, request, this);
+        }
     }
 
     @Override
@@ -149,11 +156,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         stringBuilder.append("location=" + latLng.latitude + "," + latLng.longitude);
         stringBuilder.append("&radius=" + 3000); //3kms radius = 3000m
-        if (type.equals("medicine")) {
-            stringBuilder.append("&keyword=" + "medicalshop");
-        } else if (type.equals("grocery")) {
-            stringBuilder.append("&keyword=" + "grocery");
+
+        switch (type) {
+            case "medicine":
+                stringBuilder.append("&keyword=" + "pharmacy");
+                break;
+
+            case "grocery":
+                stringBuilder.append("&keyword=" + "grocery");
+                break;
+
+            case "pharmacy":
+                stringBuilder.append("&keyword=" + "pharmacy");
+                break;
+
+            case "grocery_store":
+                stringBuilder.append("&keyword=" + "grocerystore");
+                break;
+
+            case "hospital":
+                stringBuilder.append("&keyword=" + "hospital");
+                break;
+
+            case "restaurant":
+                stringBuilder.append("&keyword=" + "restaurant");
+                break;
+
+            case "gym":
+                stringBuilder.append("&keyword=" + "gym");
+                break;
+
+            case "parlour":
+                stringBuilder.append("&keyword=" + "parlour");
+                break;
         }
+
         stringBuilder.append("&key=" + getResources().getString(R.string.google_places_key));
         String url = stringBuilder.toString();
 

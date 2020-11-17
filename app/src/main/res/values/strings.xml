@@ -59,4 +59,11 @@
     <string name="submit_idea">Submit idea</string>
     <string name="coronavirus_disease_covid_19_pandemic">Coronavirus disease (COVID-19) Pandemic</string>
     <string name="we_collect_every_information_from_world_health_organization_s_who_official_website">We collect every information from World Health Organization\'s (WHO) official website.</string>
+    <string name="outlet_finder">OUTLET FINDER</string>
+    <string name="title_activity_outlet_finder">OutletFinderActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

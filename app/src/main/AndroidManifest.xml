@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.android.coronahack.heedcustomer">
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -24,7 +28,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.ViewActivity"></activity>
+        <activity android:name=".activities.OutletFinderActivity"></activity>
+        <activity android:name=".activities.ViewActivity" />
         <activity android:name=".activities.InfoActivity" />
         <activity android:name=".activities.IdeasActivity" />
         <activity android:name=".activities.NotificationActivity" />

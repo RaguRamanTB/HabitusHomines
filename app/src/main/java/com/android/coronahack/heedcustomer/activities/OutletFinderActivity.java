@@ -13,7 +13,6 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.INotificationSideChannel;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
@@ -25,7 +24,7 @@ import com.android.coronahack.heedcustomer.helpers.GridItem;
 
 import java.util.ArrayList;
 
-public class InfoActivity extends AppCompatActivity {
+public class OutletFinderActivity extends AppCompatActivity {
 
     Handler handler;
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -35,13 +34,13 @@ public class InfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
+        setContentView(R.layout.activity_outlet_finder);
 
         handler  = new Handler();
         startRepeatingTask();
 
-        Toolbar toolbar = findViewById(R.id.infoToolbar);
-        toolbar.setTitle("Learn about COVID-19");
+        Toolbar toolbar = findViewById(R.id.outletFinderToolbar);
+        toolbar.setTitle("Find outlets near you");
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +49,7 @@ public class InfoActivity extends AppCompatActivity {
             }
         });
 
-        gridView = findViewById(R.id.landing_grid);
+        gridView = findViewById(R.id.outletFinder_grid);
         gridAdapter = new GridAdapter(this, getData());
         gridView.setAdapter(gridAdapter);
     }
@@ -58,43 +57,33 @@ public class InfoActivity extends AppCompatActivity {
     private ArrayList<GridItem> getData() {
         ArrayList<GridItem> menuItems = new ArrayList<>();
         GridItem m = new GridItem();
-        m.setGridPicture(R.drawable.masks);
-        m.setGridText("When and how to use masks");
+        m.setGridPicture(R.drawable.pharmacy);
+        m.setGridText("Pharmacy");
         menuItems.add(m);
 
         m = new GridItem();
-        m.setGridPicture(R.drawable.myths);
-        m.setGridText("Myth-busters");
+        m.setGridPicture(R.drawable.hospital);
+        m.setGridText("Hospitals");
         menuItems.add(m);
 
         m = new GridItem();
-        m.setGridPicture(R.drawable.workplace);
-        m.setGridText("Getting workplace ready");
+        m.setGridPicture(R.drawable.shop);
+        m.setGridText("Grocery stores");
         menuItems.add(m);
 
         m = new GridItem();
-        m.setGridPicture(R.drawable.advocacy);
-        m.setGridText("Advocacy");
+        m.setGridPicture(R.drawable.diningtable);
+        m.setGridText("Restaurant");
         menuItems.add(m);
 
         m = new GridItem();
-        m.setGridPicture(R.drawable.youtube);
-        m.setGridText("Watch videos");
+        m.setGridPicture(R.drawable.dumbbell);
+        m.setGridText("Gym");
         menuItems.add(m);
 
         m = new GridItem();
-        m.setGridPicture(R.drawable.technical);
-        m.setGridText("Technical guidance");
-        menuItems.add(m);
-
-        m = new GridItem();
-        m.setGridPicture(R.drawable.strategic);
-        m.setGridText("Strategies, plans and operations");
-        menuItems.add(m);
-
-        m = new GridItem();
-        m.setGridPicture(R.drawable.training);
-        m.setGridText("Training and exercises");
+        m.setGridPicture(R.drawable.barberchair);
+        m.setGridText("Parlour");
         menuItems.add(m);
 
         return menuItems;
@@ -144,7 +133,7 @@ public class InfoActivity extends AppCompatActivity {
                 if (rssi > -68) {
                     ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
                     toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 2000);
-                    Toast.makeText(InfoActivity.this, "Please maintain distance from others!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OutletFinderActivity.this, "Please maintain distance from others!", Toast.LENGTH_SHORT).show();
                 }
             }
         }

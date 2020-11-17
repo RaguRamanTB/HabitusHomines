@@ -153,7 +153,6 @@ public class MedicalShopActivity extends AppCompatActivity {
         });
     }
 
-
     Runnable runnable = new Runnable() {
         @Override
         public void run() {

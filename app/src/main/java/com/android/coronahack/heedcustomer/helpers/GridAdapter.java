@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.coronahack.heedcustomer.R;
+import com.android.coronahack.heedcustomer.activities.MapsActivity;
 import com.android.coronahack.heedcustomer.activities.ViewActivity;
 
 import java.util.ArrayList;
@@ -112,6 +113,42 @@ public class GridAdapter extends BaseAdapter {
                         intent7.putExtra("type", "page");
                         intent7.putExtra("link", "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/training");
                         c.startActivity(intent7);
+                        break;
+
+                    case "pharmacy":
+                        Intent intent8 = new Intent(c, MapsActivity.class);
+                        intent8.putExtra("type", "pharmacy");
+                        c.startActivity(intent8);
+                        break;
+
+                    case "hospitals":
+                        Intent intent9 = new Intent(c, MapsActivity.class);
+                        intent9.putExtra("type", "hospital");
+                        c.startActivity(intent9);
+                        break;
+
+                    case "grocery stores":
+                        Intent intent10 = new Intent(c, MapsActivity.class);
+                        intent10.putExtra("type", "grocery_store");
+                        c.startActivity(intent10);
+                        break;
+
+                    case "restaurant":
+                        Intent intent11 = new Intent(c, MapsActivity.class);
+                        intent11.putExtra("type", "restaurant");
+                        c.startActivity(intent11);
+                        break;
+
+                    case "gym":
+                        Intent intent12 = new Intent(c, MapsActivity.class);
+                        intent12.putExtra("type", "gym");
+                        c.startActivity(intent12);
+                        break;
+
+                    case "parlour":
+                        Intent intent13 = new Intent(c, MapsActivity.class);
+                        intent13.putExtra("type", "parlour");
+                        c.startActivity(intent13);
                         break;
 
                     default:
