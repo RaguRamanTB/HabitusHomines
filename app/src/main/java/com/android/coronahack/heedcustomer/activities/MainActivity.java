@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         final RadioGroup radioGroup = registerView.findViewById(R.id.radioGroup);
         Button registerButton = registerView.findViewById(R.id.registerButton);
         ImageView getLocation = registerView.findViewById(R.id.locationButton);
-        final CheckBox volunteerCheckbox = registerView.findViewById(R.id.volunteerCheckbox);
+//        final CheckBox volunteerCheckbox = registerView.findViewById(R.id.volunteerCheckbox);
         progressBar = registerView.findViewById(R.id.progressBar);
 
         resultReceiver = new AddressResultReceiver(new Handler());
@@ -269,9 +269,9 @@ public class MainActivity extends AppCompatActivity {
                 getAddress = address.getText().toString();
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 gender = registerView.findViewById(selectedId);
-                if (volunteerCheckbox.isChecked()) {
-                    isVolunteer = "1";
-                }
+//                if (volunteerCheckbox.isChecked()) {
+//                    isVolunteer = "1";
+//                }
                 if (getName.equals("") || getName.length() == 0
                         || getAge.equals("") || getAge.length() == 0
                         || getAddress.equals("") || getAddress.length() == 0 || selectedId == -1) {
